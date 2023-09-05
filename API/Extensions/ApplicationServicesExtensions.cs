@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Errors;
+using Microsoft.AspNetCore.Authentication.OAuth;
 
 namespace API.Extensions
 {
@@ -31,6 +32,13 @@ namespace API.Extensions
 
                     return new BadRequestObjectResult(errorResponse);
                     };
+            });
+
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
             });
             
             return services;
