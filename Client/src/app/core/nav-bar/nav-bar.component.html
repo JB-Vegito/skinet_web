@@ -11,9 +11,11 @@ fixed-top shadow-sm">
         <a class="p-2" routerLink="/test-error" routerLinkActive="active">Errors</a>        
     </nav>
     <div class="d-flex align-items-center">
-        <a style="position: relative;">
+        <a routerLink="/basket" style="position: relative;">
             <i class="fa fa-shopping-cart fa-2x me-5 text-light"></i>
-            <div class="cart-no text-light">7</div>
+            <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no text-light">
+                {{getCount(basket.items)}}
+            </div>
         </a>
         <a href="" class="btn btn-primary text-light btn-outline-primary me-2">Login</a>
         <a href="" class="btn btn-success text-light btn-outline-success me-3">Signup</a>
